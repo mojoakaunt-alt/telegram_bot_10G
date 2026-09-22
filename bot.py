@@ -34,6 +34,9 @@ def now():
     return datetime.now(TZ)
 
 def mins(value):
+    if not value or ":" not in value:
+        return 9999
+
     h, m = value.split(":")
     return int(h)*60+int(m)
 
