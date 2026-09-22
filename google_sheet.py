@@ -6,10 +6,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def normalize_time(x):
-    x=str(x).replace(".",":").strip()
-    if len(x)==4:
-        x="0"+x
-    return x
+    if not x:
+        return ""
+
+    x = str(x).strip()
+
+    x = x.replace(".", ":")
+
+    if ":" not in x:
+        return ""
+
+    parts = x.split(":")
+
+    if len(parts) != 2:
+        return ""
+
+    h = parts[0].zfill(2)
+    m = parts[1].zfill(2)
+
+    return f"{h}:{m}"
 
 @lru_cache()
 def get_lessons():
